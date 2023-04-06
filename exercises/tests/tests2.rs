@@ -9,6 +9,7 @@
 mod tests {
     #[test]
     fn you_can_assert_eq() {
-        assert_eq!();
+        let x =1;
+        assert_eq!(x,1);
     }
 }

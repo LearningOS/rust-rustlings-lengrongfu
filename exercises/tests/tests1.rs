@@ -13,6 +13,7 @@
 mod tests {
     #[test]
     fn you_can_assert() {
-        assert!();
+        let x =1;
+        assert!(x==1);
     }
 }

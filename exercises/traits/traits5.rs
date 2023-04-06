@@ -21,17 +21,40 @@ pub trait OtherTrait {
 struct SomeStruct {}
 struct OtherStruct {}
 
-impl SomeTrait for SomeStruct {}
-impl OtherTrait for SomeStruct {}
-impl SomeTrait for OtherStruct {}
-impl OtherTrait for OtherStruct {}
+impl SomeTrait for SomeStruct {
+    fn some_function(&self) -> bool {
+        true
+    }
+}
+impl OtherTrait for SomeStruct {
+    fn other_function(&self) -> bool {
+        true
+    }
+}
+
+impl SomeTrait for OtherStruct {
+    fn some_function(&self) -> bool {
+        true
+    }
+}
+impl OtherTrait for OtherStruct {
+    fn other_function(&self) -> bool {
+        true
+    }
+}
 
 // YOU MAY ONLY CHANGE THE NEXT LINE
-fn some_func(item: ??) -> bool {
+trait SomeOtherTrait: SomeTrait + OtherTrait {}
+
+impl SomeOtherTrait for SomeStruct {}
+impl SomeOtherTrait for OtherStruct {}
+
+
+fn some_func(item: Box<dyn SomeOtherTrait>) -> bool {
     item.some_function() && item.other_function()
 }
 
 fn main() {
-    some_func(SomeStruct {});
-    some_func(OtherStruct {});
+    some_func(Box::new(SomeStruct {}));
+    some_func(Box::new(OtherStruct {}));
 }
